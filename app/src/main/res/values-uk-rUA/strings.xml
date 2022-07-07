@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">VVE_mobile</string>
+    <string name="title">Назва</string>
+    <string name="shop">Магазин</string>
+    <string name="cancel">Вiдмiна</string>
+    <string name="ok">ОК</string>
+    <string name="worker">Робiтник</string>
+    <string name="description">Опис</string>
+    <string name="delete">Видалити</string>
+    <string name="add_new_checkout">Додати нову касу</string>
+    <string name="login_in">Логiн</string>
+    <string name="sing_up">Регестрацiя</string>
+    <string name="administrator">Адмiнiстратор</string>
+    <string name="backups">Бекапи</string>
+    <string name="create_the_backup">Створити бекап</string>
+    <string name="restore_last_backup">Вiдтворити останнiй бекап</string>
+    <string name="count_of_customers">Кiлькiсть вiдвiдувачiв</string>
+    <string name="rebalance">Ребаланс</string>
+    <string name="password">Пароль</string>
+    <string name="name">Iм`я</string>
+    <string name="surname">Прiзвище</string>
+    <string name="checkouts">Каси</string>
+    <string name="settings">Налаштування</string>
+    <string name="login">Логин</string>
+</resources>

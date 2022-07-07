@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">VVE_mobile</string>
+    <string name="title">Title</string>
+    <string name="shop">Shop</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="worker">Worker</string>
+    <string name="description">Description</string>
+    <string name="delete">Delete</string>
+    <string name="add_new_checkout">Add new checkout</string>
+    <string name="login_in">Log in</string>
+    <string name="sing_up">Sign up</string>
+    <string name="administrator">Administrator</string>
+    <string name="backups">Backups</string>
+    <string name="create_the_backup">Create the Backup</string>
+    <string name="restore_last_backup">Restore Last Backup</string>
+    <string name="count_of_customers">Count Of Customers</string>
+    <string name="rebalance">Rebalance</string>
+    <string name="password">Password:</string>
+    <string name="name">Name:</string>
+    <string name="surname">Surname:</string>
+    <string name="checkouts">Checkouts</string>
+    <string name="settings">Settings</string>
+    <string name="login">LogIn</string>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/checkouts"
+        android:icon="@drawable/ic_checkout"
+        android:title="@string/checkouts" />
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/settings" />
+    <item
+        android:id="@+id/log_in"
+        android:icon="@drawable/ic_baseline_login_24"
+        android:title="@string/login" />
+</menu>
