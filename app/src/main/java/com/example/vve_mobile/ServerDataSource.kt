@@ -3,25 +3,28 @@ package com.example.vve_mobile
 import android.util.Log
 import com.example.vve_mobile.models.*
 import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
+import org.json.JSONObject
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
-import com.google.gson.Gson
-import org.json.JSONArray
-import org.json.JSONObject
 
 class ServerDataSource(private val apiHelper: ApiHelper) {
 //    companion object {
 //        lateinit var _user: User
 //    }
 
-    suspend fun registerAdministrator(name: String, surname: String, email: String, password: String, shop: Int){
+    suspend fun registerAdministrator(
+        name: String,
+        surname: String,
+        email: String,
+        password: String,
+        shop: Int
+    ) {
         val administrator = Administrator(-1, name, surname, email, shop)
 //        _user = apiHelper.registerAdministrator(administrator)
     }
+
     suspend fun getPeopleByCheckout(id: Int): Int {
         return apiHelper.getPeopleByCheckout(id)
     }
@@ -34,11 +37,11 @@ class ServerDataSource(private val apiHelper: ApiHelper) {
         apiHelper.rebalance(id)
     }
 
-    suspend fun createBackup(){
+    suspend fun createBackup() {
         return apiHelper.createBackup()
     }
 
-    suspend fun restoreLastBackup(){
+    suspend fun restoreLastBackup() {
         return apiHelper.restoreLastBackup()
     }
 
@@ -92,10 +95,10 @@ class ServerDataSource(private val apiHelper: ApiHelper) {
         apiHelper.updateCheckout(id, title, description, shop, worker)
     }
 
-    suspend fun loginUser(email: String, password: String) : User {
+    suspend fun loginUser(email: String, password: String): User {
         val res = apiHelper.loginAdministrator(email, password).string()
         val jsonObject = JSONObject(res.substring(res.indexOf("{"), res.lastIndexOf("}") + 1))
-        val role = jsonObject.getString("role");
+        val role = jsonObject.getString("role")
         val user = jsonObject.getJSONObject("user")
         if (role == "Administrator") {
 //            _user = Administrator(user.getInt("id"),
@@ -107,7 +110,7 @@ class ServerDataSource(private val apiHelper: ApiHelper) {
 //            )
         }
 //        Log.d("!!!!!!!!!!!!!!!!!!!!!!!!!!", _user.toString())
-            return Administrator(5, "admin", "surname", "admin@gmail.com", 1)
+        return Administrator(5, "admin", "surname", "admin@gmail.com", 1)
     }
 }
 
@@ -154,10 +157,10 @@ interface ApiService {
     suspend fun createCheckout(@Body checkout: Checkout)
 
     @POST("auth/administrator/register/")
-    suspend fun registerAdministrator(@Body administrator: Administrator) : Administrator
+    suspend fun registerAdministrator(@Body administrator: Administrator): Administrator
 
     @POST("auth/administrator/login/")
-    suspend fun loginAdministrator(@Body data: Map<String, String>) : ResponseBody
+    suspend fun loginAdministrator(@Body data: Map<String, String>): ResponseBody
 
     @PUT("api/checkouts/{id}/")
     suspend fun updateCheckout(@Path("id") id: Int, @Body checkout: Checkout): Response<Unit>
@@ -167,10 +170,6 @@ interface ApiService {
         @Path("id") id: Int
     ): Response<Unit>
 
-//    @Headers("Content-Type: application/json")
-//    @FormUrlEncoded
-//    @POST("checkouts/")
-//    suspend fun createCheckout(@Field("title") title: String, @Field("description")description: String, @Field("shop")shop: Int,@Field("worker") worker: Int)
 }
 
 object RetrofitBuilder {
@@ -207,21 +206,21 @@ class ApiHelper(private val apiService: ApiService) {
             val json = res.split(";")
             for (i in json) {
                 val a = i.split(":")[0].substring(2, i.split(":")[0].length - 1)
-                val b = i.split(":")[1]
+                val b = i.split(":")[1].substring(0, i.split(":")[1].length - 1)
                 try {
-                    str += "Problems in Checkout '${a}' with ${b[0]} people\n"
+                    str += "Problems in Checkout '${a}' with $b people\n"
                 } catch (exception: Exception) {
 
                 }
             }
-        }
-            catch(exception2: Exception){
+        } catch (exception2: Exception) {
 
-            }
+        }
         //Problems in ${checkouts.find(x => x.id == key).title} with ${obj[key]} people\n
 
         return str
     }
+
     suspend fun rebalance(id: Int) = apiService.rebalance(id)
     suspend fun getPeopleByCheckout(id: Int) = apiService.getPeopleByCheckout(id)
     suspend fun createBackup() = apiService.createBackup()
@@ -249,7 +248,9 @@ class ApiHelper(private val apiService: ApiService) {
 
     suspend fun getWorkers() = apiService.getWorkers()
     suspend fun getShops() = apiService.getShops()
-    suspend fun registerAdministrator(administrator: Administrator) = apiService.registerAdministrator(administrator)
+    suspend fun registerAdministrator(administrator: Administrator) =
+        apiService.registerAdministrator(administrator)
+
     suspend fun loginAdministrator(email: String, password: String): ResponseBody {
         val map: HashMap<String, String> = HashMap()
         map["email"] = email

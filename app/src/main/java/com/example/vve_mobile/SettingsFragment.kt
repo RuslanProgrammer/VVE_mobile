@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.vve_mobile.databinding.FragmentCheckoutsBinding
 import com.example.vve_mobile.databinding.FragmentSettingsBinding
 import kotlinx.coroutines.runBlocking
 
@@ -31,8 +30,7 @@ class SettingsFragment : Fragment() {
                 try {
                     db.createBackup()
                     Toast.makeText(activity, "Created new backup", Toast.LENGTH_SHORT).show()
-                }
-                catch (exception: Exception){
+                } catch (exception: Exception) {
                     Log.d("Error", exception.message.toString())
                     Toast.makeText(activity, "ERROR", Toast.LENGTH_SHORT).show()
                 }
@@ -43,8 +41,7 @@ class SettingsFragment : Fragment() {
                 try {
                     db.restoreLastBackup()
                     Toast.makeText(activity, "Restored last backup", Toast.LENGTH_SHORT).show()
-                }
-                catch (exception: Exception){
+                } catch (exception: Exception) {
                     Log.d("Error", exception.message.toString())
                     Toast.makeText(activity, "ERROR", Toast.LENGTH_SHORT).show()
                 }

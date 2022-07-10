@@ -4,7 +4,10 @@ import com.airbnb.mvrx.*
 import com.example.vve_mobile.ApiHelper
 import com.example.vve_mobile.RetrofitBuilder
 import com.example.vve_mobile.ServerDataSource
-import com.example.vve_mobile.models.*
+import com.example.vve_mobile.models.Administrator
+import com.example.vve_mobile.models.Checkout
+import com.example.vve_mobile.models.User
+import com.example.vve_mobile.models.Worker
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -26,7 +29,8 @@ class CheckoutViewModel(
         }
         runBlocking {
             val user = serverDataSource.getUser()
-            val checkoutList: List<Checkout> = serverDataSource.getCheckoutListByShop((user as Administrator).shop)
+            val checkoutList: List<Checkout> =
+                serverDataSource.getCheckoutListByShop((user as Administrator).shop)
             val freeWorkerList = mapOf(
                 "free" to serverDataSource.getAllAvailableWorkersByShopId(1),
                 "all" to serverDataSource.getWorkers()

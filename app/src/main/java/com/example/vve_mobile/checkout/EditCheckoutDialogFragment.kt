@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.SpannableStringBuilder
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,6 @@ import com.example.vve_mobile.R
 import com.example.vve_mobile.RetrofitBuilder
 import com.example.vve_mobile.ServerDataSource
 import com.example.vve_mobile.databinding.CardChangeCheckoutBinding
-import com.example.vve_mobile.models.Administrator
 import com.example.vve_mobile.models.Worker
 import kotlinx.coroutines.runBlocking
 
@@ -77,8 +75,7 @@ class EditCheckoutDialogFragment(
         if (id == null) {
             binding.deleteButton.isEnabled = false
 
-        }
-        else{
+        } else {
             runBlocking {
                 val db = ServerDataSource(ApiHelper(RetrofitBuilder.apiService))
                 binding.peopleText.text = db.getPeopleByCheckout(id!!).toString()
@@ -91,9 +88,6 @@ class EditCheckoutDialogFragment(
             if (binding.workerSpinner.selectedItemId >= 0) {
                 worker = freeWorkersId?.get(binding.workerSpinner.selectedItemId.toInt())
                 if (title != null && description != null && worker != null) {
-                    Log.d("OK", title!!)
-                    Log.d("OK", description!!)
-                    Log.d("OK", binding.workerSpinner.selectedItem!!.toString())
                     if (title!!.length > 2 && description!!.length > 2 && worker!! >= 0) {
                         if (id == null) {
                             edit.createCheckout(title!!, description!!, worker!!)

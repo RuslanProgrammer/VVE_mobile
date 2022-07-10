@@ -1,24 +1,15 @@
 package com.example.vve_mobile
 
 import android.os.Bundle
-import android.text.SpannableStringBuilder
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.vve_mobile.RetrofitBuilder.apiService
-import com.example.vve_mobile.checkout.EditCheckoutDialogFragment
-import com.example.vve_mobile.databinding.CardChangeCheckoutBinding
-import com.example.vve_mobile.databinding.FragmentLogInBinding
 import com.example.vve_mobile.databinding.FragmentSignUpBinding
 import com.example.vve_mobile.models.Shop
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class SignUpFragment : DialogFragment() {
@@ -43,7 +34,7 @@ class SignUpFragment : DialogFragment() {
 
         binding.shopSpinner.adapter = ArrayAdapter(
             requireActivity(),
-            R.layout.support_simple_spinner_dropdown_item, shops.map { it.name } ?: listOf()
+            R.layout.support_simple_spinner_dropdown_item, shops.map { it.name }
         )
         binding.signUp.setOnClickListener { _ ->
             val name = binding.nameEnterField.text.toString()
@@ -52,10 +43,11 @@ class SignUpFragment : DialogFragment() {
             val shop = shops[binding.shopSpinner.selectedItemId.toInt()].id
             val password = binding.passwordEnterField.text.toString()
 
-            Log.d("",
+            Log.d(
+                "",
                 (name.length > 1 && surname.length > 1 && email.length > 1 && shop >= 0 && password.length > 3).toString()
             )
-            if(name.length > 1 && surname.length > 1 && email.length > 1 && shop >= 0 && password.length > 3){
+            if (name.length > 1 && surname.length > 1 && email.length > 1 && shop >= 0 && password.length > 3) {
                 runBlocking {
                     db.registerAdministrator(name, surname, email, password, shop)
                 }

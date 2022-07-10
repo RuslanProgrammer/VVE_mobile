@@ -2,7 +2,6 @@ package com.example.vve_mobile.checkout
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.mvrx.Success
@@ -34,12 +33,12 @@ class CheckoutsFragment : MvRxBaseFragment(R.layout.fragment_checkouts) {
                 runBlocking {
                     db.rebalance(user.shop)
                     binding.baseInfo.text = db.getInfo(user.shop)
-                    if(binding.baseInfo.text.length < 3){
+                    if (binding.baseInfo.text.length < 3) {
                         binding.rebalance.isEnabled = false
                     }
                 }
             }
-            if(binding.baseInfo.text.length < 3){
+            if (binding.baseInfo.text.length < 3) {
                 binding.rebalance.isEnabled = false
             }
         }

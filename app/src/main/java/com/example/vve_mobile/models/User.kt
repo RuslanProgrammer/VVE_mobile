@@ -1,7 +1,6 @@
 package com.example.vve_mobile.models
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
 
 abstract class User {
     abstract val id: Int
